@@ -14,13 +14,13 @@ const LossForm = ({ lossToEdit, onSave }) => {
     const [lossDate, setLossDate] = useState('');
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/products/')
+        axios.get('https://dlc-manager-backend.onrender.com/api/products/')
             .then(response => {
                 console.log("Produits chargés :", response.data);
                 setProducts(response.data);
             })
             .catch(error => console.error("Erreur lors du chargement des produits :", error));
-        axios.get('http://localhost:8000/api/categories/')
+        axios.get('https://dlc-manager-backend.onrender.com/api/categories/')
             .then(response => {
                 console.log("Catégories chargées :", response.data);
                 setCategories(response.data);
@@ -60,7 +60,7 @@ const LossForm = ({ lossToEdit, onSave }) => {
             }
             console.log("Création d'un produit personnalisé :", customProductName);
             try {
-                const response = await axios.post('http://localhost:8000/api/products/', {
+                const response = await axios.post('https://dlc-manager-backend.onrender.com/api/products/', {
                     name: customProductName,
                     type: 'frais',
                     is_active: true,
@@ -89,11 +89,11 @@ const LossForm = ({ lossToEdit, onSave }) => {
         try {
             let response;
             if (lossToEdit) {
-                response = await axios.patch(`http://localhost:8000/api/losses/${lossToEdit.id}/`, data);
+                response = await axios.patch(`https://dlc-manager-backend.onrender.com/api/losses/${lossToEdit.id}/`, data);
                 console.log("Perte mise à jour :", response.data);
                 alert('Perte mise à jour !');
             } else {
-                response = await axios.post('http://localhost:8000/api/losses/', data);
+                response = await axios.post('https://dlc-manager-backend.onrender.com/api/losses/', data);
                 console.log("Perte ajoutée :", response.data);
                 alert('Perte ajoutée !');
             }
@@ -114,7 +114,7 @@ const LossForm = ({ lossToEdit, onSave }) => {
     const handleAddCategory = (inputValue) => {
         if (inputValue && !categories.find(c => c.name.toLowerCase() === inputValue.toLowerCase())) {
             console.log("Création d'une catégorie :", inputValue);
-            axios.post('http://localhost:8000/api/categories/', { name: inputValue })
+            axios.post('https://dlc-manager-backend.onrender.com/api/categories/', { name: inputValue })
                 .then(response => {
                     setCategories([...categories, response.data]);
                     setCategory(response.data);

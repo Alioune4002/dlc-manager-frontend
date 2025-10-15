@@ -8,8 +8,8 @@ const Statistics = () => {
     const [productStats, setProductStats] = useState([]);
 
     useEffect(() => {
-        // Charger les statistiques par catégorie (existant)
-        axios.get('http://localhost:8000/api/losses/')
+        
+        axios.get('https://dlc-manager-backend.onrender.com/api/losses/')
             .then(response => {
                 const losses = response.data;
                 const categoryData = losses.reduce((acc, loss) => {
@@ -26,8 +26,8 @@ const Statistics = () => {
             })
             .catch(error => console.error("Erreur lors du chargement des pertes :", error));
 
-        // Charger les statistiques par produit (nouveau)
-        axios.get('http://localhost:8000/api/losses-by-product/')
+        
+        axios.get('https://dlc-manager-backend.onrender.com/api/losses-by-product/')
             .then(response => {
                 setProductStats(response.data);
             })
@@ -40,7 +40,7 @@ const Statistics = () => {
                 Statistiques des Pertes
             </Typography>
 
-            {/* Graphique des pertes par catégorie (existant) */}
+            
             <Typography variant="h6" gutterBottom>
                 Coût des Pertes par Catégorie
             </Typography>
@@ -58,7 +58,7 @@ const Statistics = () => {
                 <Bar dataKey="totalCost" fill="#8884d8" name="Coût Total (€)" />
             </BarChart>
 
-            {/* Tableau des pertes par catégorie (existant) */}
+            
             <TableContainer component={Paper} sx={{ mt: 4 }}>
                 <Table>
                     <TableHead>
@@ -80,7 +80,7 @@ const Statistics = () => {
                 </Table>
             </TableContainer>
 
-            {/* Nouveau tableau : Pertes par produit dans le mois courant */}
+            
             <Typography variant="h6" gutterBottom sx={{ mt: 4 }}>
                 Pertes par Produit (Mois Courant)
             </Typography>

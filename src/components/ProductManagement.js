@@ -19,7 +19,7 @@ const ProductManagement = () => {
     }, []);
 
     const fetchProducts = () => {
-        axios.get('http://localhost:8000/api/products/')
+        axios.get('https://dlc-manager-backend.onrender.com/api/products/')
             .then(response => {
                 console.log("Produits chargés :", response.data);
                 setProducts(response.data);
@@ -31,7 +31,7 @@ const ProductManagement = () => {
         e.preventDefault();
         console.log("Ajout du produit :", newProduct);
         try {
-            await axios.post('http://localhost:8000/api/products/', {
+            await axios.post('https://dlc-manager-backend.onrender.com/api/products/', {
                 ...newProduct,
                 is_active: true,
                 added_date: new Date().toISOString().split('T')[0]
@@ -65,7 +65,7 @@ const ProductManagement = () => {
     const handleSave = async (productId) => {
         console.log("Sauvegarde du produit ID :", productId, "Données :", formData);
         try {
-            await axios.patch(`http://localhost:8000/api/products/${productId}/`, formData);
+            await axios.patch(`https://dlc-manager-backend.onrender.com/products/${productId}/`, formData);
             console.log("Produit mis à jour");
             setEditingProduct(null);
             setFormData({ name: '', type: 'frais', dlc: '', is_active: true });
@@ -81,7 +81,7 @@ const ProductManagement = () => {
         if (window.confirm('Voulez-vous vraiment supprimer ce produit ?')) {
             console.log("Suppression du produit ID :", productId);
             try {
-                await axios.delete(`http://localhost:8000/api/products/${productId}/`);
+                await axios.delete(`https://dlc-manager-backend.onrender.com/api/products/${productId}/`);
                 console.log("Produit supprimé");
                 fetchProducts();
                 alert('Produit supprimé !');

@@ -34,7 +34,7 @@ const LossList = () => {
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/losses/')
+        axios.get('https://dlc-manager-backend.onrender.com/api/losses/')
             .then(response => {
                 console.log("Pertes chargées :", response.data);
                 setLosses(response.data);
@@ -42,11 +42,11 @@ const LossList = () => {
             })
             .catch(error => console.error("Erreur lors du chargement des pertes :", error));
 
-        axios.get('http://localhost:8000/api/products/')
+        axios.get('https://dlc-manager-backend.onrender.com/api/products/')
             .then(response => setProducts(response.data))
             .catch(error => console.error("Erreur lors du chargement des produits :", error));
 
-        axios.get('http://localhost:8000/api/categories/')
+        axios.get('https://dlc-manager-backend.onrender.com/api/categories/')
             .then(response => setCategories(response.data))
             .catch(error => console.error("Erreur lors du chargement des catégories :", error));
     }, []);
@@ -83,7 +83,7 @@ const LossList = () => {
             delete data.price;
         }
         if (data.id) {
-            axios.put(`http://localhost:8000/api/losses/${data.id}/`, data)
+            axios.put(`https://dlc-manager-backend.onrender.com/api/losses/${data.id}/`, data)
                 .then(response => {
                     const updatedLosses = losses.map(loss => loss.id === response.data.id ? response.data : loss);
                     setLosses(updatedLosses);
@@ -94,7 +94,7 @@ const LossList = () => {
                 })
                 .catch(error => console.error("Erreur lors de la mise à jour de la perte :", error));
         } else {
-            axios.post('http://localhost:8000/api/losses/', data)
+            axios.post('https://dlc-manager-backend.onrender.com/api/losses/', data)
                 .then(response => {
                     const updatedLosses = [...losses, response.data];
                     setLosses(updatedLosses);
@@ -122,7 +122,7 @@ const LossList = () => {
 
     const handleDelete = (id) => {
         if (window.confirm('Voulez-vous vraiment supprimer cette perte ?')) {
-            axios.delete(`http://localhost:8000/api/losses/${id}/`)
+            axios.delete(`https://dlc-manager-backend.onrender.com/api/losses/${id}/`)
                 .then(() => {
                     const updatedLosses = losses.filter(loss => loss.id !== id);
                     setLosses(updatedLosses);
@@ -135,7 +135,7 @@ const LossList = () => {
     };
 
     const handleDownloadPDF = () => {
-        axios.get('http://localhost:8000/api/download-losses-pdf/', {
+        axios.get('https://dlc-manager-backend.onrender.com/api/download-losses-pdf/', {
             params: {
                 year: downloadMonth.year,
                 month: parseInt(downloadMonth.month)

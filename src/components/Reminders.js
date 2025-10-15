@@ -6,7 +6,7 @@ const Reminders = () => {
     const [reminders, setReminders] = useState({ reduce_tomorrow: [], withdraw_today: [] });
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/reminders/')
+        axios.get('https://dlc-manager-backend.onrender.com/api/reminders/')
             .then(response => {
                 console.log("Rappels chargés :", response.data);
                 const data = response.data || {};
@@ -26,7 +26,7 @@ const Reminders = () => {
                 Rappels
             </Typography>
 
-            {/* Liste des produits à réduire (-30%) */}
+            
             <Typography variant="h6" gutterBottom>
                 Produits à réduire à -30% (demain)
             </Typography>
@@ -51,7 +51,7 @@ const Reminders = () => {
                 </Table>
             </TableContainer>
 
-            {/* Liste des produits à retirer */}
+            
             <Typography variant="h6" gutterBottom>
                 Produits à retirer ce soir (aujourd'hui)
             </Typography>

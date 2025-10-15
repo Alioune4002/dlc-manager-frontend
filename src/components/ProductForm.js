@@ -13,7 +13,7 @@ const ProductForm = () => {
         if (type !== 'non_perissable') {
             data.dlc = dlc;
         }
-        axios.post('http://localhost:8000/api/products/', data)
+        axios.post('https://dlc-manager-backend.onrender.com/api/products/', data)
             .then(response => {
                 alert('Produit ajouté !');
                 setName('');

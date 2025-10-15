@@ -6,7 +6,7 @@ const ProductList = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/products/?is_active=true')
+        axios.get('https://dlc-manager-backend.onrender.com/api/products/?is_active=true')
             .then(response => setProducts(response.data))
             .catch(error => console.error(error));
     }, []);
